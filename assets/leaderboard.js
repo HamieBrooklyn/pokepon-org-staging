@@ -285,13 +285,13 @@
     });
     var meta = CATEGORY_META[state.category];
     if (els.lead && meta) {
-      var scopeNote =
-        state.scope === "server" && state.guildName
-          ? " Rankings for **" + state.guildName + "**."
-          : state.scope === "server"
-            ? " Pick a server you share with the bot."
-            : "";
-      els.lead.textContent = meta.lead + scopeNote;
+      if (state.scope === "server") {
+        els.lead.textContent =
+          "Pick a Discord server that has Poké Pon, then browse rankings for members in that server only. " +
+          (meta ? meta.lead : "");
+      } else if (els.lead && meta) {
+        els.lead.textContent = meta.lead;
+      }
     }
     if (els.previewHint) {
       els.previewHint.hidden = isServerCategory(state.category);
@@ -671,11 +671,18 @@
     bindEntryClicks(els.podium);
     bindEntryClicks(els.list);
     renderPager(data);
-    if (!data.total) {
+    if (data.members_unavailable) {
       setStatus(
-        state.category === "auction"
-          ? "No completed auction sales yet."
-          : "No ranked players yet."
+        "Could not load server members yet. Use /cd in this server once, or try again in a moment.",
+        true
+      );
+    } else if (!data.total) {
+      setStatus(
+        state.scope === "server"
+          ? "No ranked players in this server yet — open packs or trade here to climb the board."
+          : state.category === "auction"
+            ? "No completed auction sales yet."
+            : "No ranked players yet."
       );
     } else {
       setStatus("");
