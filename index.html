@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <title>Poké Pon — Discord bot</title>
+  <meta name="description" content="Poké Pon: Pokémon TCG gacha, collection, trades, and auctions on Discord." />
+  <link rel="canonical" href="https://pokepon.org/" />
+  <link rel="stylesheet" href="assets/style.css?v=46" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <header class="site-header site-header-home">
+    <div class="site-header-row">
+      <a class="logo brand-lockup" href="./"><img src="/assets/logo.jpg" alt="" class="brand-logo" width="40" height="40" decoding="async" /><span class="brand-name">Poké Pon</span></a>
+      <div class="site-header-cta">
+        <a class="btn btn-ghost btn-small" href="https://discord.gg/MaSEAnxTBn" data-pokepon-link="server-invite" target="_blank" rel="noopener noreferrer">Join server</a>
+        <a class="btn btn-ghost btn-small" href="https://discord.com/oauth2/authorize?client_id=1496227239803748362&amp;permissions=268954721&amp;integration_type=0&amp;scope=bot+applications.commands" data-pokepon-link="bot-invite" target="_blank" rel="noopener noreferrer">Add bot</a>
+        <a class="btn btn-primary btn-small" href="https://top.gg/bot/1496227239803748362/vote" data-pokepon-link="topgg-vote" target="_blank" rel="noopener noreferrer">Vote on Top.gg</a>
+      </div>
+    </div>
+    <nav class="home-nav" aria-label="Site sections">
+      <div class="home-nav-group">
+        <span class="home-nav-label">Your cards</span>
+        <div class="home-nav-links">
+          <a href="/collection/">Collection</a>
+        </div>
+      </div>
+      <div class="home-nav-group">
+        <span class="home-nav-label">Catalog</span>
+        <div class="home-nav-links">
+          <a href="/pokedex/">Pokédex</a>
+          <a href="/packs/">Packs</a>
+        </div>
+      </div>
+      <div class="home-nav-group">
+        <span class="home-nav-label">Build &amp; play</span>
+        <div class="home-nav-links">
+          <a href="/craft/">Crafting</a>
+          <a href="/deck/">Deck editor</a>
+        </div>
+      </div>
+      <div class="home-nav-group">
+        <span class="home-nav-label">Multiplayer</span>
+        <div class="home-nav-links">
+          <a href="/trades/">Trades</a>
+          <a href="/auctions/">Auctions</a>
+          <a href="/leaderboard/">Leaderboards</a>
+        </div>
+      </div>
+      <div class="home-nav-group">
+        <span class="home-nav-label">Store</span>
+        <div class="home-nav-links">
+          <a href="/shop/">Shop</a>
+        </div>
+      </div>
+      <details class="home-nav-more">
+        <summary>More</summary>
+        <div class="home-nav-more-menu">
+          <a href="#player-guide">Player guide</a>
+          <a href="/terms/">Terms</a>
+          <a href="/privacy/">Privacy</a>
+          <a href="https://github.com/HamieBrooklyn/Poke-Cards" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-kicker">Discord · Pokémon TCG</p>
+      <h1>Open packs, build your collection, trade, and auction.</h1>
+      <p class="hero-lead">
+        Poké Pon is a Discord bot for curated TCG drops, inventory, player trades, and timed card auctions—built on real printings from the Pokémon TCG API.
+      </p>
+
+      <aside id="home-set-chase" class="home-set-chase" hidden aria-label="Seasonal set chase">
+        <p class="home-set-chase-kicker">Season event</p>
+        <h2 class="home-set-chase-title" id="home-set-chase-title">Set chase</h2>
+        <p class="home-set-chase-lead" id="home-set-chase-lead"></p>
+        <div class="home-set-chase-bars" id="home-set-chase-bars"></div>
+        <p class="home-set-chase-meta" id="home-set-chase-meta"></p>
+        <button class="btn btn-primary btn-small" type="button" id="home-set-chase-claim" hidden>Claim reward</button>
+      </aside>
+
+      <aside id="home-events" class="home-events" hidden aria-label="Current events">
+        <p class="home-events-kicker">Community</p>
+        <h2 class="home-events-title">What&apos;s going on in the Discord?</h2>
+        <div id="home-events-list" class="home-events-list"></div>
+      </aside>
+
+      <aside class="referral-promo" aria-label="Refer a friend">
+        <p class="referral-promo-kicker">Invite friends · earn Crystals</p>
+        <p class="referral-promo-title">Your invite. Their packs. Your reward.</p>
+        <p class="referral-promo-text">
+          Share your personal invite link from Profile → Referrals. Only
+          <strong>first-time joins</strong> count (they must use your link; leave/rejoin does not).
+          When they use <strong>cd</strong> <strong>10 times</strong>, you get
+          <strong>💎 25 Crystals</strong> — up to <strong>3 friends</strong>. Leave/rejoin tricks do not work.
+        </p>
+      </aside>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1496227239803748362&amp;permissions=268954721&amp;integration_type=0&amp;scope=bot+applications.commands" data-pokepon-link="bot-invite" target="_blank" rel="noopener noreferrer">Add to Discord</a>
+        <a class="btn btn-ghost" href="/collection/">Open web app</a>
+        <a class="btn btn-ghost" href="https://github.com/HamieBrooklyn/Poke-Cards" target="_blank" rel="noopener noreferrer">Source</a>
+      </div>
+
+      <section class="home-features" aria-label="Website tools">
+        <a class="home-feature-card" href="/collection/">
+          <span class="home-feature-icon" aria-hidden="true">▣</span>
+          <h3>Collection</h3>
+          <p>Search your binder, sell to the shop, grade cards.</p>
+        </a>
+        <a class="home-feature-card" href="/pokedex/">
+          <span class="home-feature-icon" aria-hidden="true">◎</span>
+          <h3>Pokédex</h3>
+          <p>Browse every imported printing and check what you own.</p>
+        </a>
+        <a class="home-feature-card" href="/packs/">
+          <span class="home-feature-icon" aria-hidden="true">▥</span>
+          <h3>Packs</h3>
+          <p>Search boosters and view pool odds.</p>
+        </a>
+        <a class="home-feature-card" href="/deck/">
+          <span class="home-feature-icon" aria-hidden="true">⚔</span>
+          <h3>Deck editor</h3>
+          <p>Save up to six cards for Discord combat decks.</p>
+        </a>
+        <a class="home-feature-card" href="/trades/">
+          <span class="home-feature-icon" aria-hidden="true">⇄</span>
+          <h3>Trades</h3>
+          <p>Trade cards and currency with other players.</p>
+        </a>
+        <a class="home-feature-card" href="/auctions/">
+          <span class="home-feature-icon" aria-hidden="true">⚖</span>
+          <h3>Auctions</h3>
+          <p>Bid on listings in ₽ or Crystals.</p>
+        </a>
+        <a class="home-feature-card" href="/leaderboard/">
+          <span class="home-feature-icon" aria-hidden="true">★</span>
+          <h3>Leaderboards</h3>
+          <p>Global rankings for stats and sales.</p>
+        </a>
+        <a class="home-feature-card home-feature-card-shop" href="/shop/">
+          <span class="home-feature-icon" aria-hidden="true">◆</span>
+          <h3>Shop</h3>
+          <p>Top up Pokedollars and Crystals via Stripe.</p>
+        </a>
+      </section>
+      <p class="hero-note">
+        Replace the invite URL’s <code>client_id</code> with your application’s ID from the
+        <a href="https://discord.com/developers/applications" target="_blank" rel="noopener noreferrer">Discord Developer Portal</a>.
+        New to the bot? See the <a href="#player-guide">player guide</a> below.
+      </p>
+    </section>
+
+    <section id="player-guide" class="prose player-guide-on-home" tabindex="-1">
+      <p class="guide-kicker">Getting started</p>
+      <h2>Player guide</h2>
+
+      <h3>1. How you use the bot</h3>
+      <ul>
+        <li><strong>Slash commands:</strong> type <code>/</code> and pick a command (for example <code>/balance</code>, <code>/daily</code>).</li>
+        <li><strong>Text shortcuts (optional):</strong> many card commands also work with the prefix <code>c</code> (for example <code>ccd</code> for a drop) or by <strong>mentioning the bot</strong> first. If that does not work in your server, stick to slash commands.</li>
+      </ul>
+
+      <h3>2. First steps</h3>
+      <ol>
+        <li><code>/balance</code> — see your <strong>Pokedollars</strong> and <strong>Crystals</strong>.</li>
+        <li><code>/daily</code> — claim your daily reward when it is available.</li>
+        <li><code>/cd</code> or <code>ccd</code> — <strong>card drop</strong>: opens a pack-style pull; use the <strong>buttons</strong> to choose what you keep. Card IDs may appear as plain text under the message so you can copy them on mobile.</li>
+        <li><code>/coll</code> or <code>ccoll</code> — list saved cards (often with pages).</li>
+      </ol>
+
+      <h3>3. Collection &amp; search</h3>
+      <ul>
+        <li><code>/cs</code> — search the <strong>global catalog</strong> or <strong>your collection</strong> (pick the mode the command offers).</li>
+        <li><code>/cv</code> — full <strong>card view</strong> (large image + details) for one card.</li>
+        <li><code>/colv</code> — flip through your cards like a binder (arrow buttons).</li>
+        <li><a href="/collection/">Web collection</a> — sign in with Discord and browse your whole binder in a grid, search by name, sort by rarity/HP/damage, and <strong>sell cards to the shop</strong> using the bot’s collection buyout pricing (<code>quote_collection_sell_payout</code> on a deployed bot from <a href="https://github.com/HamieBrooklyn/Poke-Cards/commit/97c5d1f">Poke-Cards 97c5d1f+</a>).</li>
+        <li><a href="/auctions/">Web auctions</a> — browse and search live listings, bid in Pokedollars or Crystals, and create listings from cards you own.</li>
+      </ul>
+
+      <h3>4. Packs (10 cards + 1 code card)</h3>
+      <ul>
+        <li><code>/packv</code> — find packs by <strong>series / set</strong>, browse art, and <strong>buy with Crystals</strong> on a series. Rarer packs cost more Crystals.</li>
+        <li><code>/packd</code> — <strong>random</strong> pack for <strong>5,000</strong> Pokedollars or <strong>10</strong> Crystals (or your server’s shop consumable, if configured).</li>
+        <li><code>/packcolv</code> — see <strong>unopened packs</strong>; use <strong>Open</strong>, flip through pulls, and <strong>Scrap</strong> cards you do not want (the rest stay in your collection).</li>
+      </ul>
+      <p>Crystals come from <strong>voting on Top.gg</strong> (vote on the site, then use any bot command — rewards arrive in a DM) and from <strong>code cards</strong> inside packs.</p>
+
+      <h3>5. More features</h3>
+      <ul>
+        <li><code>/vote</code> — Top.gg link and status; rewards apply automatically after you vote (website or Discord).</li>
+        <li><code>trade</code> — player trades (for example <code>trade offer</code>).</li>
+        <li><code>/auction</code> — list, bid, and search auctions.</li>
+        <li><code>deck</code> — save your combat lineup (up to six cards). Use the <a href="/deck/">web deck editor</a> for drag-and-drop.</li>
+        <li><code>/leaderboard</code> — server or global rankings: strongest cards, tankiest cards, rarest cards, and top auction sales. Browse global standings on the <a href="/leaderboard/">Leaderboards</a> page.</li>
+      </ul>
+
+      <h3>6. Tips</h3>
+      <ul>
+        <li>If a new command <strong>does not show up</strong> yet, global slash commands can take a little while to update on Discord after a bot update.</li>
+        <li>Use <code>/help</code> or <code>chelp</code> if your server exposes a command list.</li>
+      </ul>
+
+      <p class="back-to-top"><a href="#">↑ Back to top</a></p>
+    </section>
+
+    <section class="legal-strip">
+      <h2>Legal</h2>
+      <p>Use of the bot is subject to our policies and to Discord’s Terms of Service.</p>
+      <ul class="legal-links">
+        <li><a href="#player-guide">Player guide</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="y"></span> Poké Pon · Not affiliated with Nintendo, The Pokémon Company, or Creatures Inc.</span>
+    <span class="footer-links">
+      <a href="#player-guide">Guide</a>
+      <a href="/terms/">Terms</a>
+      <a href="/privacy/">Privacy</a>
+    </span>
+  </footer>
+  <meta name="pokepon-api-base" content="https://api.pokepon.org" />
+  <script src="/assets/api-base-init.js?v=1"></script>
+  <script src="/assets/staging-env.js?v=1" defer></script>
+  <script src="assets/site-links.js?v=1" defer></script>
+  <script src="assets/home-events.js?v=7" defer></script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
